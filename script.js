@@ -69,3 +69,65 @@ function deleteNote(noteId) {
     const note = document.getElementById(noteId);
     note.remove();
 }
+let noteId = 0;
+
+// Crear una nueva forma
+function addShape(shape) {
+    const canvas = document.getElementById("canvas");
+    const element = document.createElement("div");
+    element.className = `shape ${shape}`;
+    element.style.position = "absolute";
+    element.style.top = `${Math.random() * (canvas.clientHeight - 100)}px`;
+    element.style.left = `${Math.random() * (canvas.clientWidth - 100)}px`;
+
+    // Estilos específicos para formas especiales
+    if (shape === "triangle") {
+        element.style.width = "0";
+        element.style.height = "0";
+        element.style.borderLeft = "50px solid transparent";
+        element.style.borderRight = "50px solid transparent";
+        element.style.borderBottom = "100px solid black";
+        element.style.backgroundColor = "transparent"; // Necesario para triángulos
+    } else if (shape === "circle") {
+        element.style.width = "100px";
+        element.style.height = "100px";
+        element.style.borderRadius = "50%";
+        element.style.backgroundColor = "#ccc";
+    } else {
+        element.style.width = "100px";
+        element.style.height = "100px";
+        element.style.backgroundColor = "#ccc";
+    }
+
+    makeDraggable(element); // Hacer la forma arrastrable
+    canvas.appendChild(element); // Añadir al canvas
+}
+
+// Hacer un elemento arrastrable
+function makeDraggable(element) {
+    element.onmousedown = (e) => {
+        const offsetX = e.offsetX;
+        const offsetY = e.offsetY;
+
+        const moveAt = (pageX, pageY) => {
+            element.style.left = `${pageX - offsetX}px`;
+            element.style.top = `${pageY - offsetY}px`;
+        };
+
+        const onMouseMove = (e) => moveAt(e.pageX, e.pageY);
+        document.addEventListener("mousemove", onMouseMove);
+
+        element.onmouseup = () => {
+            document.removeEventListener("mousemove", onMouseMove);
+            element.onmouseup = null;
+        };
+
+        e.preventDefault();
+    };
+}
+
+// Limpiar el canvas
+function clearCanvas() {
+    const canvas = document.getElementById("canvas");
+    canvas.innerHTML = ""; // Eliminar todos los elementos
+}
