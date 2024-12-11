@@ -1,55 +1,81 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
 }
 
 .toolbar {
-    background-color: #007acc;
-    padding: 10px;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 16px;
 }
 
 .toolbar button {
     background-color: white;
+    color: #4caf50;
     border: none;
-    padding: 10px 15px;
     border-radius: 5px;
+    padding: 10px 15px;
     cursor: pointer;
-    font-size: 16px;
+    font-weight: bold;
 }
 
 .toolbar button:hover {
-    background-color: #e0e0e0;
+    background-color: #388e3c;
+    color: white;
 }
 
 .canvas {
-    width: 100%;
-    height: calc(100vh - 50px);
     position: relative;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background-color: #ffffff;
     overflow: hidden;
-    background-color: white;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
 }
 
 .note {
     position: absolute;
-    background-color: #ffeb3b;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    cursor: move;
-    width: 150px;
+    background-color: #ffeeba;
+    color: #212529;
+    border: 2px solid #f7d794;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    cursor: grab;
+    width: 200px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .note textarea {
-    width: 100%;
-    height: 100%;
+    flex: 1;
     border: none;
-    resize: none;
-    font-size: 14px;
-    background-color: transparent;
     outline: none;
+    resize: none;
+    background-color: transparent;
+    font-size: 14px;
+    color: #212529;
+}
+
+.note .delete-btn {
+    background-color: #ff5252;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.note .delete-btn:hover {
+    background-color: #e53935;
 }
