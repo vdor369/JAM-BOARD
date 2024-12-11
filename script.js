@@ -1,25 +1,31 @@
-function createNote() {
-    const canvas = document.getElementById("canvas");
+const canvas = document.getElementById("canvas");
+
+// Crear una nueva nota
+document.getElementById("addNoteBtn").addEventListener("click", () => {
     const note = document.createElement("div");
     note.className = "note";
-    note.style.top = `${Math.random() * 400}px`;
-    note.style.left = `${Math.random() * 400}px`;
     note.contentEditable = true;
-    note.textContent = "Double-click to edit...";
+    note.style.top = `${Math.random() * 300}px`;
+    note.style.left = `${Math.random() * 300}px`;
     makeDraggable(note);
     canvas.appendChild(note);
-}
+});
+
+// Crear una nueva forma
+["circle", "triangle", "rectangle"].forEach((shape) => {
+    document.getElementById(`${shape}Btn`).addEventListener("click", () => addShape(shape));
+});
 
 function addShape(type) {
-    const canvas = document.getElementById("canvas");
     const shape = document.createElement("div");
     shape.className = `shape ${type}`;
-    shape.style.top = `${Math.random() * 400}px`;
-    shape.style.left = `${Math.random() * 400}px`;
+    shape.style.top = `${Math.random() * 300}px`;
+    shape.style.left = `${Math.random() * 300}px`;
     makeDraggable(shape);
     canvas.appendChild(shape);
 }
 
+// Hacer elementos arrastrables
 function makeDraggable(element) {
     element.onmousedown = (e) => {
         const offsetX = e.offsetX;
@@ -40,7 +46,20 @@ function makeDraggable(element) {
     };
 }
 
-function clearCanvas() {
-    const canvas = document.getElementById("canvas");
+// Limpiar canvas
+document.getElementById("clearCanvasBtn").addEventListener("click", () => {
     canvas.innerHTML = "";
-}
+});
+
+// Compartir Jamboard
+document.getElementById("shareBtn").addEventListener("click", () => {
+    const modal = document.getElementById("shareModal");
+    const link = `${window.location.href}?boardId=${Math.random().toString(36).substr(2, 9)}`;
+    document.getElementById("shareLink").value = link;
+    modal.classList.remove("hidden");
+});
+
+// Cerrar Modal
+document.getElementById("closeModalBtn").addEventListener("click", () => {
+    document.getElementById("shareModal").classList.add("hidden");
+});
