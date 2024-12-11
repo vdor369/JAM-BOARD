@@ -3,45 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jamboard Minimalist</title>
+    <title>Interactive Dashboard</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Barra lateral -->
     <aside class="toolbar">
-        <header>
-            <h1>Jamboard</h1>
-        </header>
-        <section class="tools">
-            <h2>Tools</h2>
-            <button id="addNoteBtn">📝 Add Note</button>
-            <button id="drawBtn">✏️ Draw</button>
-            <button id="clearCanvasBtn">🗑️ Clear</button>
-        </section>
-        <section class="shapes">
-            <h2>Shapes</h2>
-            <button id="circleBtn">⚪ Circle</button>
-            <button id="triangleBtn">🔺 Triangle</button>
-            <button id="rectangleBtn">⬛ Rectangle</button>
-        </section>
-        <section class="share">
-            <button id="shareBtn">📤 Share</button>
-        </section>
+        <h1>Dashboard</h1>
+        <button onclick="createNote()">📝 Add Note</button>
+        <button onclick="addText()">🔤 Add Text</button>
+        <button onclick="enableDrawing()">✏️ Draw</button>
+        <button onclick="connectShapes()">🔗 Connect</button>
+        <button onclick="clearCanvas()">❌ Clear Board</button>
+        <h2>Shapes</h2>
+        <button onclick="addShape('circle')">⚪ Circle</button>
+        <button onclick="addShape('square')">⬜ Square</button>
+        <button onclick="addShape('triangle')">🔺 Triangle</button>
+        <button onclick="addShape('rectangle')">⬛ Rectangle</button>
+        <button onclick="addShape('oval')">⭕ Oval</button>
+        <button onclick="addShape('hexagon')">⬢ Hexagon</button>
+        <button onclick="addShape('pentagon')">⬟ Pentagon</button>
+        <button onclick="addShape('star')">⭐ Star</button>
+        <button onclick="addShape('diamond')">💎 Diamond</button>
+        <button onclick="addShape('parallelogram')">▰ Parallelogram</button>
     </aside>
-
-    <!-- Canvas principal -->
     <main id="canvas" class="canvas"></main>
-
-    <!-- Modal para compartir -->
-    <div id="shareModal" class="modal hidden">
-        <div class="modal-content">
-            <h2>Share Your Jamboard</h2>
-            <input type="text" id="shareLink" readonly />
-            <button id="closeModalBtn">Close</button>
-        </div>
-    </div>
-
-    <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 </html>
