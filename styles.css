@@ -1,130 +1,125 @@
-:root {
-    --toolbar-bg: #2c3e50;
-    --toolbar-text: #ecf0f1;
-    --button-bg: #3498db;
-    --button-hover-bg: #2980b9;
-    --canvas-bg: #ffffff;
-    --note-bg: #fdcb6e;
-    --note-border: #e17055;
-    --shape-border: #636e72;
-    --modal-bg: rgba(0, 0, 0, 0.5);
-}
-
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
     display: flex;
     height: 100vh;
-    background-color: var(--canvas-bg);
+    background-color: #f4f4f4;
     overflow: hidden;
 }
 
-/* Barra lateral */
 .toolbar {
     width: 250px;
-    background-color: var(--toolbar-bg);
-    color: var(--toolbar-text);
-    padding: 20px;
+    background: linear-gradient(135deg, #333, #555);
+    color: white;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    padding: 20px;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
 }
 
-.toolbar h1 {
+.toolbar h1, .toolbar h2 {
     font-size: 1.5rem;
-    margin-bottom: 20px;
+    margin: 10px 0;
+    text-align: center;
+    color: #f4f4f4;
 }
 
 .toolbar button {
-    margin: 10px 0;
-    padding: 10px 15px;
-    background-color: var(--button-bg);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
     width: 100%;
-    transition: background-color 0.3s;
+    margin: 8px 0;
+    padding: 12px;
+    font-size: 1rem;
+    color: white;
+    background: linear-gradient(135deg, #007acc, #005f99);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
 }
 
 .toolbar button:hover {
-    background-color: var(--button-hover-bg);
+    background: linear-gradient(135deg, #005f99, #004d7a);
+    transform: scale(1.05);
 }
 
-/* Canvas */
+.toolbar button:active {
+    transform: scale(0.95);
+}
+
 .canvas {
     flex: 1;
     position: relative;
+    background: radial-gradient(circle, #ffffff, #eaeaea);
     overflow: hidden;
-    background-color: var(--canvas-bg);
-}
-
-/* Notas */
-.note {
-    position: absolute;
-    background-color: var(--note-bg);
-    border: 2px solid var(--note-border);
-    padding: 10px;
-    border-radius: 8px;
-    cursor: grab;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Formas */
-.shape {
-    position: absolute;
-    border: 2px solid var(--shape-border);
-    cursor: grab;
-}
-
-/* Triángulo */
-.shape.triangle {
-    width: 0;
-    height: 0;
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    border-bottom: 100px solid var(--shape-border);
-}
-
-/* Círculo */
-.shape.circle {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: var(--note-bg);
-}
-
-/* Rectángulo */
-.shape.rectangle {
-    width: 150px;
-    height: 100px;
-    background-color: var(--note-bg);
-}
-
-/* Modal */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--modal-bg);
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 1000;
+    justify-content: center;
 }
 
-.modal.hidden {
-    display: none;
+.shape, .note {
+    position: absolute;
+    border: 2px solid rgba(51, 51, 51, 0.8);
+    cursor: grab;
+    transition: transform 0.2s;
 }
 
-.modal-content {
-    background: white;
-    padding: 20px;
+.shape {
+    background-color: #f0f0f0;
     border-radius: 8px;
-    text-align: center;
-    width: 300px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.shape:hover {
+    transform: rotate(2deg) scale(1.02);
+}
+
+.note {
+    background-color: #ffe680;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.note:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.note textarea {
+    width: 100%;
+    height: 100px;
+    border: none;
+    outline: none;
+    resize: none;
+    background-color: transparent;
+    font-size: 1rem;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.canvas .line {
+    position: absolute;
+    background-color: black;
+    z-index: -1;
+    pointer-events: none;
+    height: 2px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .toolbar {
+        width: 200px;
+        padding: 15px;
+    }
+
+    .toolbar button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .note textarea {
+        font-size: 0.9rem;
+    }
 }
