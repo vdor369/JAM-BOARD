@@ -102,3 +102,46 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+.canvas {
+    position: relative;
+    background-color: #fefefe;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Estilo para las formas */
+.shape {
+    position: absolute;
+    cursor: grab;
+    border: 2px solid #333;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.shape:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Triángulo */
+.shape.triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid #000;
+}
+
+/* Círculo */
+.shape.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+
+/* Formas básicas como cuadrado, rectángulo */
+.shape.square,
+.shape.rectangle {
+    background-color: #ccc;
+}
