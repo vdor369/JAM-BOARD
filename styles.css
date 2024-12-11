@@ -1,143 +1,104 @@
-/* Variables CSS para facilitar personalización */
 :root {
-    --toolbar-bg-color: #282c34;
-    --toolbar-text-color: #ffffff;
-    --button-bg-color: #61dafb;
-    --button-hover-bg-color: #21a1f1;
-    --canvas-bg-color: #fefefe;
-    --note-bg-color: #fff8e1;
-    --note-border-color: #f5c518;
-    --shape-bg-color: #f9f9f9;
-    --shape-border-color: #333;
-    --line-color: #555;
-    --shadow-light: rgba(0, 0, 0, 0.1);
-    --shadow-medium: rgba(0, 0, 0, 0.3);
-    --font-family: 'Arial', sans-serif;
+    --toolbar-bg: #282c34;
+    --toolbar-text: #ffffff;
+    --canvas-bg: #fefefe;
+    --note-bg: #fff8e1;
+    --note-border: #f5c518;
+    --shape-bg: #f9f9f9;
+    --highlight-color: #61dafb;
 }
 
 body {
     margin: 0;
-    font-family: var(--font-family);
+    font-family: 'Arial', sans-serif;
     display: flex;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: var(--canvas-bg);
 }
 
-/* Estilo de la barra lateral */
+/* Barra lateral */
 .toolbar {
     width: 300px;
-    background-color: var(--toolbar-bg-color);
-    color: var(--toolbar-text-color);
+    background-color: var(--toolbar-bg);
+    color: var(--toolbar-text);
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 20px;
-    box-shadow: 3px 0 10px var(--shadow-medium);
-    overflow-y: auto;
-}
-
-.toolbar h1, .toolbar h2 {
-    font-size: 1.8rem;
-    margin: 15px 0;
-    text-align: center;
 }
 
 .toolbar button {
-    width: 100%;
     margin: 10px 0;
-    padding: 12px;
-    font-size: 1.1rem;
-    color: var(--toolbar-text-color);
-    background-color: var(--button-bg-color);
+    padding: 10px;
+    background-color: var(--highlight-color);
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
+    color: white;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    box-shadow: 0 5px 10px var(--shadow-light);
 }
 
-.toolbar button:hover {
-    background-color: var(--button-hover-bg-color);
-    transform: translateY(-2px);
+.toolbar .dropdown {
+    position: relative;
 }
 
-/* Canvas principal */
+.toolbar .dropdown-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--highlight-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.toolbar .dropdown-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--toolbar-bg);
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--highlight-color);
+    z-index: 10;
+}
+
+.toolbar .dropdown:hover .dropdown-menu {
+    display: flex;
+}
+
 .canvas {
     flex: 1;
     position: relative;
-    background-color: var(--canvas-bg-color);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-/* Elementos arrastrables comunes */
-.shape, .note {
-    position: absolute;
-    border: 2px solid var(--shape-border-color);
-    cursor: grab;
-    box-shadow: 0 5px 10px var(--shadow-light);
-    transition: transform 0.2s, box-shadow 0.3s;
-}
-
-.shape:hover, .note:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px var(--shadow-medium);
-}
-
-/* Estilo de formas */
-.shape {
-    background-color: var(--shape-bg-color);
-}
-
-/* Estilo de notas */
+/* Notas */
 .note {
-    background-color: var(--note-bg-color);
-    padding: 15px;
-    border: 2px solid var(--note-border-color);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px var(--shadow-medium);
-}
-
-.note textarea {
-    width: 100%;
-    height: 100px;
-    border: none;
-    outline: none;
-    resize: none;
-    background-color: transparent;
-    font-size: 1rem;
-    font-family: var(--font-family);
-    color: #333;
-}
-
-/* Líneas de conexión */
-.canvas .line {
     position: absolute;
-    background-color: var(--line-color);
-    z-index: -1;
+    background-color: var(--note-bg);
+    border: 2px solid var(--note-border);
+    padding: 10px;
+    border-radius: 8px;
 }
 
-/* Responsividad */
-@media (max-width: 768px) {
-    .toolbar {
-        width: 100%;
-        flex-direction: row;
-        overflow-x: auto;
-        padding: 10px;
-        box-shadow: 0 -3px 10px var(--shadow-medium);
-    }
+.note:hover .note-actions {
+    display: flex;
+}
 
-    .toolbar button {
-        flex: 1;
-        margin: 0 5px;
-        padding: 8px;
-        font-size: 0.9rem;
-    }
+/* Botones flotantes en las notas */
+.note-actions {
+    position: absolute;
+    display: none;
+    top: -10px;
+    right: -10px;
+    flex-direction: column;
+}
 
-    .canvas {
-        flex: none;
-        height: calc(100vh - 70px);
-    }
+.note-actions button {
+    margin: 5px 0;
+    padding: 5px;
+    background-color: var(--highlight-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
