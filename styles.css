@@ -1,11 +1,12 @@
 :root {
-    --toolbar-bg: #282c34;
-    --toolbar-text: #ffffff;
-    --canvas-bg: #fefefe;
-    --note-bg: #fff8e1;
-    --note-border: #f5c518;
-    --shape-bg: #f9f9f9;
-    --highlight-color: #61dafb;
+    --toolbar-bg: #2c3e50;
+    --toolbar-text: #ecf0f1;
+    --button-bg: #3498db;
+    --button-hover-bg: #2980b9;
+    --canvas-bg: #ffffff;
+    --note-bg: #f9e79f;
+    --note-border: #f1c40f;
+    --shape-border: #34495e;
 }
 
 body {
@@ -18,109 +19,92 @@ body {
 
 /* Barra lateral */
 .toolbar {
-    width: 300px;
+    width: 250px;
     background-color: var(--toolbar-bg);
     color: var(--toolbar-text);
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    align-items: center;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.toolbar h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
 }
 
 .toolbar button {
-    margin: 10px 0;
+    width: 100%;
+    margin: 5px 0;
     padding: 10px;
-    background-color: var(--highlight-color);
+    background-color: var(--button-bg);
+    color: white;
     border: none;
     border-radius: 5px;
-    color: white;
     cursor: pointer;
+    transition: all 0.3s;
 }
 
-.toolbar .dropdown {
+.toolbar button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.dropdown {
+    width: 100%;
     position: relative;
 }
 
-.toolbar .dropdown-btn {
+.dropdown-btn {
     width: 100%;
     padding: 10px;
-    background-color: var(--highlight-color);
+    background-color: var(--button-bg);
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.toolbar .dropdown-menu {
+.dropdown-menu {
     display: none;
-    flex-direction: column;
     position: absolute;
     top: 100%;
     left: 0;
     background-color: var(--toolbar-bg);
     width: 100%;
-    padding: 10px;
-    border: 1px solid var(--highlight-color);
-    z-index: 10;
-}
-
-.toolbar .dropdown:hover .dropdown-menu {
-    display: flex;
-}
-
-.canvas {
-    flex: 1;
-    position: relative;
-}
-
-/* Notas */
-.note {
-    position: absolute;
-    background-color: var(--note-bg);
-    border: 2px solid var(--note-border);
-    padding: 10px;
-    border-radius: 8px;
-}
-
-.note:hover .note-actions {
-    display: flex;
-}
-
-/* Botones flotantes en las notas */
-.note-actions {
-    position: absolute;
-    display: none;
-    top: -10px;
-    right: -10px;
+    z-index: 1000;
+    padding: 5px 0;
     flex-direction: column;
 }
 
-.note-actions button {
-    margin: 5px 0;
-    padding: 5px;
-    background-color: var(--highlight-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.dropdown:hover .dropdown-menu {
+    display: flex;
 }
+
+.dropdown-menu button {
+    margin: 5px 0;
+    padding: 10px;
+}
+
+/* Canvas */
 .canvas {
-    position: relative;
-    background-color: #fefefe;
     flex: 1;
+    position: relative;
     overflow: hidden;
 }
 
-/* Estilo para las formas */
-.shape {
+/* Elementos */
+.note, .shape {
     position: absolute;
     cursor: grab;
-    border: 2px solid #333;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, box-shadow 0.3s;
 }
 
-.shape:hover {
-    transform: scale(1.1);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+.note {
+    background-color: var(--note-bg);
+    border: 2px solid var(--note-border);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Triángulo */
@@ -129,19 +113,5 @@ body {
     height: 0;
     border-left: 50px solid transparent;
     border-right: 50px solid transparent;
-    border-bottom: 100px solid #000;
-}
-
-/* Círculo */
-.shape.circle {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: #ccc;
-}
-
-/* Formas básicas como cuadrado, rectángulo */
-.shape.square,
-.shape.rectangle {
-    background-color: #ccc;
+    border-bottom: 100px solid var(--shape-border);
 }
