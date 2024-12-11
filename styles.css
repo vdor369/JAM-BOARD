@@ -1,69 +1,103 @@
-/* Estilo general */
-body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
-    display: flex;
-    height: 100vh;
+/* Variables CSS para facilitar personalización */
+:root {
+    --toolbar-bg-color: #282c34;
+    --toolbar-text-color: #ffffff;
+    --button-bg-color: #61dafb;
+    --button-hover-bg-color: #21a1f1;
+    --canvas-bg-color: #fefefe;
+    --note-bg-color: #fff8e1;
+    --note-border-color: #f5c518;
+    --shape-bg-color: #f9f9f9;
+    --shape-border-color: #333;
+    --line-color: #555;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.3);
+    --font-family: 'Arial', sans-serif;
 }
 
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    display: flex;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+/* Estilo de la barra lateral */
 .toolbar {
-    width: 250px;
-    background-color: #333;
-    color: white;
+    width: 300px;
+    background-color: var(--toolbar-bg-color);
+    color: var(--toolbar-text-color);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 0 10px var(--shadow-medium);
+    overflow-y: auto;
 }
 
-.toolbar h1 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+.toolbar h1, .toolbar h2 {
+    font-size: 1.8rem;
+    margin: 15px 0;
+    text-align: center;
 }
 
 .toolbar button {
     width: 100%;
     margin: 10px 0;
-    padding: 10px;
-    font-size: 1rem;
-    color: white;
-    background-color: #007acc;
+    padding: 12px;
+    font-size: 1.1rem;
+    color: var(--toolbar-text-color);
+    background-color: var(--button-bg-color);
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 5px 10px var(--shadow-light);
 }
 
 .toolbar button:hover {
-    background-color: #005f99;
+    background-color: var(--button-hover-bg-color);
+    transform: translateY(-2px);
 }
 
+/* Canvas principal */
 .canvas {
     flex: 1;
     position: relative;
-    background-color: #f4f4f4;
-    background-image: linear-gradient(#e0e0e0 1px, transparent 1px),
-                      linear-gradient(90deg, #e0e0e0 1px, transparent 1px);
-    background-size: 20px 20px;
+    background-color: var(--canvas-bg-color);
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.note {
+/* Elementos arrastrables comunes */
+.shape, .note {
     position: absolute;
-    background-color: #ffe680;
-    color: #333;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s;
-    width: 200px;
+    border: 2px solid var(--shape-border-color);
     cursor: grab;
+    box-shadow: 0 5px 10px var(--shadow-light);
+    transition: transform 0.2s, box-shadow 0.3s;
 }
 
-.note:hover {
+.shape:hover, .note:hover {
     transform: scale(1.05);
+    box-shadow: 0 10px 20px var(--shadow-medium);
+}
+
+/* Estilo de formas */
+.shape {
+    background-color: var(--shape-bg-color);
+}
+
+/* Estilo de notas */
+.note {
+    background-color: var(--note-bg-color);
+    padding: 15px;
+    border: 2px solid var(--note-border-color);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-medium);
 }
 
 .note textarea {
@@ -71,21 +105,39 @@ body {
     height: 100px;
     border: none;
     outline: none;
-    background-color: transparent;
     resize: none;
+    background-color: transparent;
     font-size: 1rem;
+    font-family: var(--font-family);
+    color: #333;
 }
 
-.note .delete-btn {
-    background-color: #ff5252;
-    color: white;
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
+/* Líneas de conexión */
+.canvas .line {
+    position: absolute;
+    background-color: var(--line-color);
+    z-index: -1;
 }
 
-.note .delete-btn:hover {
-    background-color: #d32f2f;
+/* Responsividad */
+@media (max-width: 768px) {
+    .toolbar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 10px;
+        box-shadow: 0 -3px 10px var(--shadow-medium);
+    }
+
+    .toolbar button {
+        flex: 1;
+        margin: 0 5px;
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .canvas {
+        flex: none;
+        height: calc(100vh - 70px);
+    }
 }
