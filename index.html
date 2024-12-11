@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Interactive and minimalistic Jamboard-like project">
-    <title>Interactive Jamboard</title>
+    <title>Jamboard Minimalist</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,30 +12,36 @@
         <header>
             <h1>Jamboard</h1>
         </header>
-        <section>
+        <section class="tools">
             <h2>Tools</h2>
-            <button onclick="createNote()">📝 Note</button>
-            <button onclick="enableDrawing()">✏️ Draw</button>
-            <button onclick="clearCanvas()">🗑️ Clear</button>
+            <button id="addNoteBtn">📝 Add Note</button>
+            <button id="drawBtn">✏️ Draw</button>
+            <button id="clearCanvasBtn">🗑️ Clear</button>
         </section>
-        <section>
+        <section class="shapes">
             <h2>Shapes</h2>
-            <div class="dropdown">
-                <button class="dropdown-btn">➕ Add Shape</button>
-                <div class="dropdown-menu">
-                    <button onclick="addShape('circle')">⚪ Circle</button>
-                    <button onclick="addShape('rectangle')">⬛ Rectangle</button>
-                    <button onclick="addShape('triangle')">🔺 Triangle</button>
-                </div>
-            </div>
+            <button id="circleBtn">⚪ Circle</button>
+            <button id="triangleBtn">🔺 Triangle</button>
+            <button id="rectangleBtn">⬛ Rectangle</button>
+        </section>
+        <section class="share">
+            <button id="shareBtn">📤 Share</button>
         </section>
     </aside>
 
     <!-- Canvas principal -->
     <main id="canvas" class="canvas"></main>
 
-    <!-- Script -->
+    <!-- Modal para compartir -->
+    <div id="shareModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Share Your Jamboard</h2>
+            <input type="text" id="shareLink" readonly />
+            <button id="closeModalBtn">Close</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 </html>
-
