@@ -1,65 +1,121 @@
-const canvas = document.getElementById("canvas");
+let noteId = 0;
+let isDrawing = false;
+let startX, startY, currentLine;
 
-// Crear una nueva nota
-document.getElementById("addNoteBtn").addEventListener("click", () => {
+function createNote() {
+    const canvas = document.getElementById("canvas");
     const note = document.createElement("div");
     note.className = "note";
-    note.contentEditable = true;
-    note.style.top = `${Math.random() * 300}px`;
-    note.style.left = `${Math.random() * 300}px`;
-    makeDraggable(note);
+    note.id = `note-${noteId++}`;
+    note.style.top = `${Math.random() * (canvas.clientHeight - 200)}px`;
+    note.style.left = `${Math.random() * (canvas.clientWidth - 200)}px`;
+
+    note.innerHTML = `
+        <textarea placeholder="Type something..."></textarea>
+    `;
+
+    note.addEventListener("mousedown", dragElement);
     canvas.appendChild(note);
-});
-
-// Crear una nueva forma
-["circle", "triangle", "rectangle"].forEach((shape) => {
-    document.getElementById(`${shape}Btn`).addEventListener("click", () => addShape(shape));
-});
-
-function addShape(type) {
-    const shape = document.createElement("div");
-    shape.className = `shape ${type}`;
-    shape.style.top = `${Math.random() * 300}px`;
-    shape.style.left = `${Math.random() * 300}px`;
-    makeDraggable(shape);
-    canvas.appendChild(shape);
 }
 
-// Hacer elementos arrastrables
-function makeDraggable(element) {
-    element.onmousedown = (e) => {
-        const offsetX = e.offsetX;
-        const offsetY = e.offsetY;
+function addShape(shape) {
+    const canvas = document.getElementById("canvas");
+    const element = document.createElement("div");
+    element.className = "shape";
+    element.style.width = "100px";
+    element.style.height = "100px";
+    element.style.borderRadius = shape === "circle" || shape === "oval" ? "50%" : "0";
 
-        const moveAt = (pageX, pageY) => {
-            element.style.left = `${pageX - offsetX}px`;
-            element.style.top = `${pageY - offsetY}px`;
-        };
+    if (shape === "triangle") {
+        element.style.width = "0";
+        element.style.height = "0";
+        element.style.borderLeft = "50px solid transparent";
+        element.style.borderRight = "50px solid transparent";
+        element.style.borderBottom = "100px solid #333";
+        element.style.backgroundColor = "transparent";
+    }
 
-        const onMouseMove = (e) => moveAt(e.pageX, e.pageY);
-        document.addEventListener("mousemove", onMouseMove);
+    element.style.top = `${Math.random() * (canvas.clientHeight - 200)}px`;
+    element.style.left = `${Math.random() * (canvas.clientWidth - 200)}px`;
 
-        element.onmouseup = () => {
-            document.removeEventListener("mousemove", onMouseMove);
-            element.onmouseup = null;
-        };
+    element.addEventListener("mousedown", dragElement);
+    canvas.appendChild(element);
+}
+
+function addText() {
+    const canvas = document.getElementById("canvas");
+    const textElement = document.createElement("div");
+    textElement.className = "note";
+    textElement.contentEditable = "true";
+    textElement.style.width = "200px";
+    textElement.style.height = "auto";
+    textElement.style.borderRadius = "0";
+    textElement.innerHTML = "Edit text...";
+    textElement.style.top = `${Math.random() * (canvas.clientHeight - 200)}px`;
+    textElement.style.left = `${Math.random() * (canvas.clientWidth - 200)}px`;
+
+    textElement.addEventListener("mousedown", dragElement);
+    canvas.appendChild(textElement);
+}
+
+function enableDrawing() {
+    const canvas = document.getElementById("canvas");
+    canvas.onmousedown = (e) => {
+        isDrawing = true;
+        startX = e.offsetX;
+        startY = e.offsetY;
+
+        currentLine = document.createElement("div");
+        currentLine.className = "line";
+        currentLine.style.position = "absolute";
+        currentLine.style.top = `${startY}px`;
+        currentLine.style.left = `${startX}px`;
+        currentLine.style.width = "2px";
+        currentLine.style.height = "2px";
+        canvas.appendChild(currentLine);
+    };
+
+    canvas.onmousemove = (e) => {
+        if (isDrawing) {
+            const width = Math.abs(e.offsetX - startX);
+            const height = Math.abs(e.offsetY - startY);
+            currentLine.style.width = `${width}px`;
+            currentLine.style.height = `${height}px`;
+        }
+    };
+
+    canvas.onmouseup = () => {
+        isDrawing = false;
     };
 }
 
-// Limpiar canvas
-document.getElementById("clearCanvasBtn").addEventListener("click", () => {
-    canvas.innerHTML = "";
-});
+function connectShapes() {
+    alert("Click on two shapes to connect them.");
+    // Implement logic to draw lines between selected elements.
+}
 
-// Compartir Jamboard
-document.getElementById("shareBtn").addEventListener("click", () => {
-    const modal = document.getElementById("shareModal");
-    const link = `${window.location.href}?boardId=${Math.random().toString(36).substr(2, 9)}`;
-    document.getElementById("shareLink").value = link;
-    modal.classList.remove("hidden");
-});
+function dragElement(event) {
+    const element = event.target;
+    let shiftX = event.clientX - element.getBoundingClientRect().left;
+    let shiftY = event.clientY - element.getBoundingClientRect().top;
 
-// Cerrar Modal
-document.getElementById("closeModalBtn").addEventListener("click", () => {
-    document.getElementById("shareModal").classList.add("hidden");
-});
+    function moveAt(pageX, pageY) {
+        element.style.left = `${pageX - shiftX}px`;
+        element.style.top = `${pageY - shiftY}px`;
+    }
+
+    function onMouseMove(e) {
+        moveAt(e.pageX, e.pageY);
+    }
+
+    document.addEventListener("mousemove", onMouseMove);
+
+    element.onmouseup = function () {
+        document.removeEventListener("mousemove", onMouseMove);
+        element.onmouseup = null;
+    };
+}
+
+function clearCanvas() {
+    document.getElementById("canvas").innerHTML = "";
+}
