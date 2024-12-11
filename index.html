@@ -3,16 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Jamboard</title>
+    <meta name="description" content="An interactive dashboard to create and manage notes, shapes, and drawings.">
+    <meta name="author" content="Your Name">
+    <meta name="keywords" content="dashboard, interactive, notes, shapes, drawing, canvas">
+    <title>Interactive Dashboard</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <aside class="toolbar">
-        <h1>Jamboard Tools</h1>
-        <button onclick="createNote()">📝 Add Note</button>
-        <button onclick="clearCanvas()">❌ Clear Board</button>
+    <!-- Barra lateral: Herramientas -->
+    <aside class="toolbar" role="complementary" aria-label="Toolbar">
+        <header>
+            <h1>Interactive Dashboard</h1>
+        </header>
+        <section>
+            <h2>Actions</h2>
+            <button onclick="createNote()" aria-label="Add Note">📝 Add Note</button>
+            <button onclick="addText()" aria-label="Add Text">🔤 Add Text</button>
+            <button onclick="enableDrawing()" aria-label="Enable Drawing">✏️ Draw</button>
+            <button onclick="connectShapes()" aria-label="Connect Shapes">🔗 Connect</button>
+            <button onclick="clearCanvas()" aria-label="Clear Canvas">❌ Clear Board</button>
+        </section>
+        <section>
+            <h2>Shapes</h2>
+            <button onclick="addShape('circle')" aria-label="Add Circle">⚪ Circle</button>
+            <button onclick="addShape('square')" aria-label="Add Square">⬜ Square</button>
+            <button onclick="addShape('triangle')" aria-label="Add Triangle">🔺 Triangle</button>
+            <button onclick="addShape('rectangle')" aria-label="Add Rectangle">⬛ Rectangle</button>
+            <button onclick="addShape('oval')" aria-label="Add Oval">⭕ Oval</button>
+            <button onclick="addShape('hexagon')" aria-label="Add Hexagon">⬢ Hexagon</button>
+            <button onclick="addShape('pentagon')" aria-label="Add Pentagon">⬟ Pentagon</button>
+            <button onclick="addShape('star')" aria-label="Add Star">⭐ Star</button>
+            <button onclick="addShape('diamond')" aria-label="Add Diamond">💎 Diamond</button>
+            <button onclick="addShape('parallelogram')" aria-label="Add Parallelogram">▰ Parallelogram</button>
+        </section>
     </aside>
-    <main id="canvas" class="canvas"></main>
+    
+    <!-- Área principal: Canvas -->
+    <main id="canvas" class="canvas" role="main" aria-label="Drawing Canvas">
+        <!-- El contenido dinámico generado con JavaScript aparecerá aquí -->
+    </main>
+
+    <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 </html>
