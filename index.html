@@ -3,78 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collaborative Jamboard</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="link-container">
-        <h2>Shareable Link</h2>
-        <input type="text" id="shareLink" readonly>
-        <button onclick="generateLink()">Generate Link</button>
-    </div>
-
-    <div class="board" id="board">
-        <!-- Slide 1 -->
-        <div class="slide">
-            <h2>Objectives</h2>
-            <div class="content" id="content1">
-                <div class="note">Define project goals</div>
-            </div>
-            <div class="add-note">
-                <input type="text" placeholder="Add a note..." id="input1">
-                <button onclick="addNote('input1', 'content1')">Add</button>
-            </div>
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="slide">
-            <h2>Brainstorming</h2>
-            <div class="content" id="content2"></div>
-            <div class="add-note">
-                <input type="text" placeholder="Add a note..." id="input2">
-                <button onclick="addNote('input2', 'content2')">Add</button>
-            </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="slide">
-            <h2>Decisions</h2>
-            <div class="content" id="content3"></div>
-            <div class="add-note">
-                <input type="text" placeholder="Add a note..." id="input3">
-                <button onclick="addNote('input3', 'content3')">Add</button>
-            </div>
-        </div>
-
-        <!-- Slide 4 -->
-        <div class="slide">
-            <h2>Actions</h2>
-            <div class="content" id="content4"></div>
-            <div class="add-note">
-                <input type="text" placeholder="Add a note..." id="input4">
-                <button onclick="addNote('input4', 'content4')">Add</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Collaborative Map</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="toolbar">
-        <button onclick="createNote()">New Note</button>
+        <button onclick="createNote()">Add Sticky Note</button>
+        <button onclick="clearCanvas()">Clear Canvas</button>
     </div>
     <div id="canvas" class="canvas"></div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
