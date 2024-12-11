@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="An interactive dashboard to create and manage notes, shapes, and drawings.">
-    <meta name="author" content="Your Name">
-    <meta name="keywords" content="dashboard, interactive, notes, shapes, drawing, canvas">
     <title>Interactive Dashboard</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -25,25 +22,29 @@
         </section>
         <section>
             <h2>Shapes</h2>
-            <button onclick="addShape('circle')" aria-label="Add Circle">⚪ Circle</button>
-            <button onclick="addShape('square')" aria-label="Add Square">⬜ Square</button>
-            <button onclick="addShape('triangle')" aria-label="Add Triangle">🔺 Triangle</button>
-            <button onclick="addShape('rectangle')" aria-label="Add Rectangle">⬛ Rectangle</button>
-            <button onclick="addShape('oval')" aria-label="Add Oval">⭕ Oval</button>
-            <button onclick="addShape('hexagon')" aria-label="Add Hexagon">⬢ Hexagon</button>
-            <button onclick="addShape('pentagon')" aria-label="Add Pentagon">⬟ Pentagon</button>
-            <button onclick="addShape('star')" aria-label="Add Star">⭐ Star</button>
-            <button onclick="addShape('diamond')" aria-label="Add Diamond">💎 Diamond</button>
-            <button onclick="addShape('parallelogram')" aria-label="Add Parallelogram">▰ Parallelogram</button>
+            <div class="dropdown">
+                <button class="dropdown-btn">⬜ Shapes</button>
+                <div class="dropdown-menu">
+                    <button onclick="addShape('circle')" aria-label="Add Circle">⚪ Circle</button>
+                    <button onclick="addShape('square')" aria-label="Add Square">⬜ Square</button>
+                    <button onclick="addShape('triangle')" aria-label="Add Triangle">🔺 Triangle</button>
+                    <button onclick="addShape('rectangle')" aria-label="Add Rectangle">⬛ Rectangle</button>
+                    <button onclick="addShape('oval')" aria-label="Add Oval">⭕ Oval</button>
+                    <button onclick="addShape('hexagon')" aria-label="Add Hexagon">⬢ Hexagon</button>
+                    <button onclick="addShape('pentagon')" aria-label="Add Pentagon">⬟ Pentagon</button>
+                    <button onclick="addShape('star')" aria-label="Add Star">⭐ Star</button>
+                    <button onclick="addShape('diamond')" aria-label="Add Diamond">💎 Diamond</button>
+                    <button onclick="addShape('parallelogram')" aria-label="Add Parallelogram">▰ Parallelogram</button>
+                </div>
+            </div>
         </section>
     </aside>
-    
+
     <!-- Área principal: Canvas -->
     <main id="canvas" class="canvas" role="main" aria-label="Drawing Canvas">
-        <!-- El contenido dinámico generado con JavaScript aparecerá aquí -->
+        <!-- Notas y contenido dinámico se generan aquí -->
     </main>
 
-    <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 </html>
