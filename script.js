@@ -5,16 +5,23 @@ function createNote() {
     const note = document.createElement("div");
     note.className = "note";
     note.id = `note-${noteId++}`;
-    note.style.top = "50px";
-    note.style.left = "50px";
+    note.style.top = `${Math.random() * (canvas.clientHeight - 200)}px`;
+    note.style.left = `${Math.random() * (canvas.clientWidth - 200)}px`;
 
     note.innerHTML = `
-        <textarea placeholder="Write something..."></textarea>
+        <textarea placeholder="Type something..."></textarea>
+        <button class="delete-btn" onclick="deleteNote('${note.id}')">Delete</button>
     `;
 
     note.addEventListener("mousedown", dragNote);
-
     canvas.appendChild(note);
+}
+
+function deleteNote(noteId) {
+    const note = document.getElementById(noteId);
+    if (note) {
+        note.remove();
+    }
 }
 
 function dragNote(event) {
@@ -23,8 +30,8 @@ function dragNote(event) {
     let shiftY = event.clientY - note.getBoundingClientRect().top;
 
     function moveAt(pageX, pageY) {
-        note.style.left = pageX - shiftX + "px";
-        note.style.top = pageY - shiftY + "px";
+        note.style.left = `${pageX - shiftX}px`;
+        note.style.top = `${pageY - shiftY}px`;
     }
 
     function onMouseMove(event) {
@@ -37,6 +44,11 @@ function dragNote(event) {
         document.removeEventListener("mousemove", onMouseMove);
         note.onmouseup = null;
     };
+}
+
+function clearCanvas() {
+    const canvas = document.getElementById("canvas");
+    canvas.innerHTML = "";
 }
 
 document.getElementById("canvas").ondragstart = function () {
